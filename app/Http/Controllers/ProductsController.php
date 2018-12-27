@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Product;
+use App\User;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -23,7 +25,16 @@ class ProductsController extends Controller
     {
         $products = new Product;
         $products = $products::all();
-        return view('products.list')->with('products', $products);
+
+        foreach ($products as $product) {
+            $category[] = Category::find($product->category_id);
+            $user[] = User::find($product->user_id);
+        }
+
+        return view('products.list')->with(['products' => $products,
+            'category' => $category,
+            'user' => $user
+            ]);
     }
 
     /**
@@ -44,7 +55,24 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'description' => 'required|min:8',
+            'brand' => 'required',
+            'category' => 'required'
+        ]);
+
+        $product = new Product;
+
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->brand = $request->input('brand');
+        $product->user_id = $request->input('user_id');
+        $product->category_id = $request->input('category');
+
+        $product->save();
+
+        return redirect('/dashboard')->with('success', 'Product Added');
     }
 
     /**
@@ -66,7 +94,9 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = new Product;
+        $product = $product::find($id);
+        return view('products.edit')->with('product', $product);
     }
 
     /**

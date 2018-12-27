@@ -18,4 +18,6 @@ Auth::routes();
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
 Route::get('/list', 'ProductsController@productList');
-Route::get('/create', 'ProductsController@create');
+Route::get('/edit/{id}', 'ProductsController@edit');
+
+Route::resource('/', 'ProductsController');

@@ -7,18 +7,21 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-heading">
-                        Create Products
+                        <div class="card-header" style="font-size:25px">
+                                Create Product
+                                <i class="fas fa-plus-circle" style="color: blue"></i>
+                        </div>
                     </div>
                     <div class="card-body">
-                        {!! Form::open(['method' => 'post']) !!}
+                        {!! Form::open(['action' => 'ProductsController@store', 'method' => 'post']) !!}
 
-                        {{ Form::Text('name', '', ['placeholder' => 'Company Name']) }}
-                        {{ Form::Text('website', '', ['placeholder' => 'Company Website']) }}
-                        {{ Form::Text('email', '', ['placeholder' => 'Contact Email']) }}
-                        {{ Form::Text('phone', '', ['placeholder' => 'Contact Phone']) }}
-                        {{ Form::Text('address', '', ['placeholder' => 'Business Address']) }}
-                        {{ Form::TextArea('bio', '', ['placeholder' => 'About this business']) }}
-                        {{ Form::Submit('Submit') }}
+                        {{ Form::bsText('name', '', ['placeholder' => 'Company Name']) }}
+                        {{ Form::bsText('description', '', ['placeholder' => 'Description Product']) }}
+                        {{ Form::bsText('brand', '', ['placeholder' => 'Brand Name']) }}
+                        {{ Form::hidden('user_id', Auth::user()->id , []) }}
+                        {{ Form::bsSelect('category', array
+                        ('1' => 'Category 1', '2' => 'Category 2')) }}
+                        {{ Form::bsSubmit('Submit') }}
 
                         {!! Form::close() !!}
                     </div>

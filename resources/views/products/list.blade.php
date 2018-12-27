@@ -6,28 +6,26 @@
         <table class="table">
             <thead>
             <tr>
-                <th>ID</th>
                 <th>Name</th>
                 <th>Description</th>
                 <th>Brand</th>
-                <th>User ID</th>
-                <th>Category ID</th>
+                <th>User</th>
+                <th>Category</th>
                 <th>Action</th>
             </tr>
             </thead>
             <tbody>
-            @foreach($products as $product)
+            @for($i = 0; $i < count($products); $i++)
                 <tr>
-                    <td> {{$product->id}} </td>
-                    <td> {{$product->name}} </td>
-                    <td> {{$product->description}} </td>
-                    <td> {{$product->brand}} </td>
-                    <td> {{$product->user_id}} </td>
-                    <td> {{$product->category_id}} </td>
-                    <td><a href="" style="font-size:25px; color:blue;"><i class="fas fa-pen-square"></i></a>
+                    <td> {{$products[$i]->name}} </td>
+                    <td> {{$products[$i]->description}} </td>
+                    <td> {{$products[$i]->brand}} </td>
+                    <td> {{$user[$i]->name}} </td>
+                    <td> {{$category[$i]->name}} </td>
+                    <td><a href="./edit/{{ $products[$i]->id }}" style="font-size:25px; color:blue;"><i class="fas fa-pen-square"></i></a>
                         <a href="" style="font-size:25px; color:red;"><i class="fas fa-trash"></i></a> </td>
                 </tr>
-            @endforeach
+            @endfor
             </tbody>
         </table>
     @else

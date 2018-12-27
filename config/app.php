@@ -175,7 +175,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        /* Mine Providers */
+        /* My Providers */
         App\Providers\FormServiceProvider::class,
 
     ],

@@ -1,5 +1,5 @@
 <div class="form-group">
 
-    {{ Form::submit($value, $attributes) }}
+    {{ Form::Submit($value, ['class' => 'btn btn-primary']) }}
 
 </div>
