@@ -123,8 +123,8 @@ class ProductsController extends Controller
         //var_dump($request->input);
 
         $product = new Product;
-
         $product = $product::find($id);
+
         $product->name = $request->input('name');
         $product->description = $request->input('description');
         $product->brand = $request->input('brand');
@@ -143,6 +143,10 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = new Product;
+        $product = $product::find($id);
+
+        $product->delete();
+        return redirect('/dashboard')->with('success', 'Product Removed');
     }
 }

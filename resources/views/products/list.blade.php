@@ -23,7 +23,7 @@
                     <td> {{$user[$i]->name}} </td>
                     <td> {{$category[$i]->name}} </td>
                     <td><a href="./edit/{{ $products[$i]->id }}" style="font-size:25px; color:blue;"><i class="fas fa-pen-square"></i></a>
-                        <a href="" style="font-size:25px; color:red;"><i class="fas fa-trash"></i></a> </td>
+                        <a href="/delete/{{ $products[$i]->id }}" style="font-size:25px; color:red;"><i class="fas fa-trash"></i></a> </td>
                 </tr>
             @endfor
             </tbody>

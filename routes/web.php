@@ -24,3 +24,4 @@ Route::get('/edit/{id}', 'ProductsController@edit');
 Route::resource('/', 'ProductsController');
 
 Route::get('/update/{id}', 'ProductsController@update');
+Route::get('/delete/{id}', 'ProductsController@destroy');
