@@ -20,4 +20,7 @@ Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 Route::get('/list', 'ProductsController@productList');
 Route::get('/edit/{id}', 'ProductsController@edit');
 
+
 Route::resource('/', 'ProductsController');
+
+Route::get('/update/{id}', 'ProductsController@update');

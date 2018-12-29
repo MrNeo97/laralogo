@@ -96,7 +96,11 @@ class ProductsController extends Controller
     {
         $product = new Product;
         $product = $product::find($id);
-        return view('products.edit')->with('product', $product);
+
+        $categories = new Category;
+        $categories = $categories->all();
+
+        return view('products.edit')->with(['product' => $product, 'categories' => $categories]);
     }
 
     /**
@@ -108,7 +112,27 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $this->validate($request, [
+            'name' => 'required',
+            'description' => 'required|min:8',
+            'brand' => 'required',
+            'category' => 'required'
+        ]);
+
+        //var_dump($request->input);
+
+        $product = new Product;
+
+        $product = $product::find($id);
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->brand = $request->input('brand');
+        $product->category_id = $request->input('category');
+
+        $product->save();
+
+        return redirect('/dashboard')->with('success', 'Product Edited');
     }
 
     /**
