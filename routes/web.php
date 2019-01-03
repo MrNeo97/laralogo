@@ -25,3 +25,4 @@ Route::resource('/', 'ProductsController');
 
 Route::get('/update/{id}', 'ProductsController@update');
 Route::get('/delete/{id}', 'ProductsController@destroy');
+Route::get('/show/', 'ProductsController@show');

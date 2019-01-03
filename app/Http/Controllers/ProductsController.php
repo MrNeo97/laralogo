@@ -6,6 +6,7 @@ use App\Category;
 use App\Product;
 use App\User;
 use Illuminate\Http\Request;
+use DB;
 
 class ProductsController extends Controller
 {
@@ -26,14 +27,10 @@ class ProductsController extends Controller
         $products = new Product;
         $products = $products::all();
 
-        foreach ($products as $product) {
-            $category[] = Category::find($product->category_id);
-            $user[] = User::find($product->user_id);
-        }
+        $value = Product::getValue($products);
 
         return view('products.list')->with(['products' => $products,
-            'category' => $category,
-            'user' => $user
+            'value' => $value
             ]);
     }
 
@@ -81,9 +78,56 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+
+        if($request->search) {
+
+            switch ($request->input('parameter')) {
+
+                case 'name':
+                    $products = Product::Search($request->parameter, $request->search);
+                    if($value = Product::getValue($products)) {
+                        return view('products.list')->with(['products' => $products,
+                            'value' => $value
+                        ]);
+                    } else {
+                        return redirect('/list')->with('success', 'Nothing found for ' . $request->search);
+                    }
+                    break;
+
+                case 'brand':
+                    $products = Product::Search($request->parameter, $request->search);
+                    if($value = Product::getValue($products)) {
+                        return view('products.list')->with(['products' => $products,
+                            'value' => $value
+                        ]);
+                    } else {
+                        return redirect('/list')->with('success', 'Nothing found for ' . $request->search);
+                    }
+                    break;
+
+                case 'category_id':
+                    $category = Category::getName('name', $request->search);
+                    //var_dump($category[0]->id);
+                    if (count($category) >= 1) {
+                        $products = Product::Search($request->parameter, $category[0]->id);
+                        $value = Product::getValue($products);
+                        return view('products.list')->with(['products' => $products,
+                            'value' => $value
+                        ]);
+                    } else {
+                        return redirect('/list')->with('success', 'Nothing found for ' . $request->search);
+                    }
+                    break;
+
+                default :
+                    return redirect('/list')->with('success', 'Please, select one option');
+            }
+        } else {
+            return redirect('/list')->with('success', 'Nothing found');
+        }
+
     }
 
     /**

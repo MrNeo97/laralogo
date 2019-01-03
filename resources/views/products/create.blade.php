@@ -15,7 +15,7 @@
                     <div class="card-body">
                         {!! Form::open(['action' => 'ProductsController@store', 'method' => 'post']) !!}
 
-                        {{ Form::bsText('name', '', ['placeholder' => 'Company Name']) }}
+                        {{ Form::bsText('name', '', ['placeholder' => 'Product Name']) }}
                         {{ Form::bsText('description', '', ['placeholder' => 'Description Product']) }}
                         {{ Form::bsText('brand', '', ['placeholder' => 'Brand Name']) }}
                         {{ Form::hidden('user_id', Auth::user()->id , []) }}
