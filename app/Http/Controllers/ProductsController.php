@@ -6,7 +6,6 @@ use App\Category;
 use App\Product;
 use App\User;
 use Illuminate\Http\Request;
-use DB;
 
 class ProductsController extends Controller
 {
@@ -19,7 +18,12 @@ class ProductsController extends Controller
     {
         $products = new Product;
         $products = $products::all();
-        return view('index')->with('products', $products);
+
+        $value = Product::getValue($products);
+
+        return view('index')->with(['products' => $products,
+            'value' => $value
+        ]);
     }
 
     public function productList()
@@ -34,6 +38,11 @@ class ProductsController extends Controller
             ]);
     }
 
+    public function products()
+    {
+        return view('products.index');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -41,7 +50,12 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        $categories = Category::all();
+        foreach ($categories as $category) {
+            $cat[$category->id] = $category->name;
+        }
+
+        return view('products.create')->with('categories', $cat);
     }
 
     /**

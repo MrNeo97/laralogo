@@ -60,6 +60,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('products') }}">{{ __('Products') }}</a>
+                            </li>
                             <li class="nav-item dropdown">
 
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -89,5 +92,26 @@
             @yield('content')
         </main>
     </div>
+
+    @if(Auth::user())
+
+        <div class="col-md-12 text-center mt-5">
+            <a class="btn btn-danger" href="/closesession" role="button">Close Session</a>
+        </div>
+
+    @endif
+
+    <!-- Footer -->
+    <footer class="page-footer font-small blue">
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2018 Copyright:
+            Laralogo
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->
+
 </body>
 </html>

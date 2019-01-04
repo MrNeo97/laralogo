@@ -19,8 +19,13 @@
                         {{ Form::bsText('description', '', ['placeholder' => 'Description Product']) }}
                         {{ Form::bsText('brand', '', ['placeholder' => 'Brand Name']) }}
                         {{ Form::hidden('user_id', Auth::user()->id , []) }}
-                        {{ Form::bsSelect('category', array
-                        ('1' => 'Category 1', '2' => 'Category 2')) }}
+
+                        @if(count($categories))
+
+                            {{ Form::bsSelect('category', $categories) }}
+
+                        @endif
+
                         {{ Form::bsSubmit('Submit') }}
 
                         {!! Form::close() !!}

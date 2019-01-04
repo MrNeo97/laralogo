@@ -11,18 +11,28 @@
 |
 */
 
-Route::get('/', 'ProductsController@index');
+Route::get('/', 'HomeController@index');
 
 Auth::routes();
 
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
-Route::get('/list', 'ProductsController@productList');
-Route::get('/edit/{id}', 'ProductsController@edit');
+Route::get('/list', 'ProductsController@index')->middleware('auth');
+Route::get('/edit/{id}', 'ProductsController@edit')->middleware('auth');
 
 
 Route::resource('/', 'ProductsController');
 
 Route::get('/update/{id}', 'ProductsController@update');
 Route::get('/delete/{id}', 'ProductsController@destroy');
-Route::get('/show/', 'ProductsController@show');
+Route::get('/show/', 'ProductsController@show')->middleware('auth');
+
+Route::get('/closesession', function() {
+    Auth::logout();
+    return redirect('/login');
+});
+
+Route::get('/products', 'ProductsController@products')->name('products')->middleware('auth');
+
+
+Route::resource('/users', 'UsersController');
