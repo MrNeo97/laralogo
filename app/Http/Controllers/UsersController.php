@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class UsersController extends Controller
 {
@@ -13,7 +14,14 @@ class UsersController extends Controller
      */
     public function index()
     {
-        //
+        $user = new User;
+        $user = $user->all();
+        return view('users.list')->with('users', $user);
+    }
+
+    public function users()
+    {
+        return view('users.index');
     }
 
     /**
@@ -23,7 +31,8 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        $rol = ['jefe' => 'jefe', 'empleado' => 'empleado'];
+        return view('users.create')->with('rol', $rol);
     }
 
     /**
@@ -34,15 +43,26 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:6'
+        ]);
+
+        $user = new User;
+
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->rol = $request->input('rol');
+        $user->password = bcrypt($request->input('password'));
+
+        $user->save();
+
+        return redirect('/dashboard')->with('success', 'User Added');
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
@@ -56,7 +76,12 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = new User;
+        $user = $user::find($id);
+
+        $rol = ['jefe', 'empleado'];
+
+        return view('users.edit')->with(['user' => $user, 'roles' => $rol]);
     }
 
     /**
@@ -68,7 +93,24 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:6'
+        ]);
+
+        $user = new User;
+        $user = $user::find($id);
+
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->rol = $request->input('rol');
+        $user->password = bcrypt($request->input('password'));
+
+        $user->save();
+
+        return redirect('/dashboard')->with('success', 'User Edited');
     }
 
     /**
@@ -79,6 +121,10 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = new User;
+        $user = $user::find($id);
+
+        $user->delete();
+        return redirect('/dashboard')->with('success', 'User Removed');
     }
 }

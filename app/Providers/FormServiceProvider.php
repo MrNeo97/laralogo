@@ -15,6 +15,7 @@ class FormServiceProvider extends ServiceProvider
     public function boot()
     {
         Form::component('bsText', 'components.form.text', ['name', 'value' => null, 'attributes' => []]);
+        Form::component('bsPassword', 'components.form.password', ['password', 'value' => null, 'attributes' => []]);
         Form::component('bsTextArea', 'components.form.textarea', ['name', 'value' => null, 'attributes' => []]);
         Form::component('bsSelect', 'components.form.select', ['name', 'value' => null, 'selected', 'attributes' => []]);
         Form::component('bsSubmit', 'components.form.submit', ['value' => 'Submit', 'attributes' => []]);

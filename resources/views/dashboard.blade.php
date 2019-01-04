@@ -36,9 +36,10 @@
         <div class="col-2"></div>
 
         <div class="col-4">
-            <div class="card">
-                <div class="card-header text-center"><h3>Users</h3></div>
-            </div>
+            <a href="/users">
+                <div class="card">
+                    <div class="card-header text-center"><h3>Users</h3></div>
+                </div>
         </div>
 
     </div>
@@ -56,7 +57,7 @@
         <div class="col-md-3">
             <div class="card">
                 <a href="/list" class="btn btn-default" style="font-size:25px; color: grey;">
-                    List Products
+                    Products List
                     <i class="fas fa-list-alt" style="color: black"></i>
                 </a>
             </div>
@@ -64,7 +65,7 @@
 
         <div class="col-md-3">
             <div class="card">
-                <a href="/create" class="btn btn-default" style="font-size:25px">
+                <a href="/users/create" class="btn btn-default" style="font-size:25px">
                     Create User
                     <i class="fas fa-user-plus" style="color:blue"></i>
                 </a>
@@ -72,8 +73,8 @@
         </div>
         <div class="col-md-3">
             <div class="card">
-                <a href="/list" class="btn btn-default" style="font-size:25px; color: grey;">
-                    List Users
+                <a href="/users/list" class="btn btn-default" style="font-size:25px; color: grey;">
+                    Users List
                     <i class="fas fa-users" style="color:black"></i>
                 </a>
             </div>

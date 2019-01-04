@@ -60,8 +60,10 @@
                         <td> {{$products[$i]->brand}} </td>
                         <td> {{$value['category'][$i]->name}} </td>
                         <td> {{$value['user'][$i]->name}} </td>
-                        <td><a href="./edit/{{ $products[$i]->id }}" style="font-size:25px; color:blue;"><i class="fas fa-pen-square"></i></a>
-                            <a href="/delete/{{ $products[$i]->id }}" style="font-size:25px; color:red;"><i class="fas fa-trash"></i></a> </td>
+                        <td>
+                            <a href="/edit/{{ $products[$i]->id }}" style="font-size:25px; color:blue;"><i class="fas fa-pen-square"></i></a>
+                            <a href="/delete/{{ $products[$i]->id }}" style="font-size:25px; color:red;"><i class="fas fa-trash"></i></a>
+                        </td>
                     </tr>
                 @endfor
                 </tbody>
