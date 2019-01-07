@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    Bienvenido {{ ucwords(Auth::user()->name) }}
+                    Welcome {{ ucwords(Auth::user()->name) }}
 
                 </div>
             </div>
@@ -22,6 +22,8 @@
     </div>
 
     <hr>
+
+    @if(Auth::user()->rol == 'jefe')
 
     <div class="row justify-content-center mb-3">
 
@@ -80,6 +82,43 @@
             </div>
         </div>
     </div>
+
+        @else
+
+        <div class="row justify-content-center mb-3">
+
+            <div class="col-8">
+                <a href="/products">
+                    <div class="card">
+                        <div class="card-header text-center"><h3>Products</h3></div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+
+
+        <div class="row justify-content-center">
+            <div class="col-md-3">
+                <div class="card">
+                    <a href="/create" class="btn btn-default" style="font-size:25px">
+                        Create Product
+                        <i class="fas fa-plus-circle" style="color: blue"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <a href="/list" class="btn btn-default" style="font-size:25px; color: grey;">
+                        Products List
+                        <i class="fas fa-list-alt" style="color: black"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        @endif
 
 
 </div>

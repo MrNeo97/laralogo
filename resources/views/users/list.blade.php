@@ -25,8 +25,12 @@
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->rol }}</td>
                             <td>
+                                @if($user->rol == 'jefe' && $user->id == 1)
+                                    <a href="/users/edit/{{ $user->id }}" style="font-size:25px; color:blue;"><i class="fas fa-user-edit"></i></a>
+                                @elseif($user->rol == 'empleado' || $user->rol == 'jefe')
                                 <a href="/users/edit/{{ $user->id }}" style="font-size:25px; color:blue;"><i class="fas fa-user-edit"></i></a>
                                 <a href="/users/destroy/{{ $user->id }}" style="font-size:25px; color:red;"><i class="fas fa-user-minus"></i></a>
+                                @endif
                             </td>
                         </tr>
 

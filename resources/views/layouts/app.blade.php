@@ -60,9 +60,11 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('products') }}">{{ __('Products') }}</a>
                             </li>
+                            @if (Auth::user()->rol == 'jefe')
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('users') }}">{{ __('Users') }}</a>
                             </li>
+                            @endif
                             <li class="nav-item dropdown">
 
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -106,7 +108,7 @@
 
         <!-- Copyright -->
         <div class="footer-copyright text-center py-3">© 2018 Copyright:
-            Laralogo
+            {{ config('app.name', 'Laravel') }}
         </div>
         <!-- Copyright -->
 
